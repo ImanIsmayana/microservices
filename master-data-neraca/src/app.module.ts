@@ -1,3 +1,10 @@
+const dotenv = require('dotenv');
+const envFound = dotenv.config();
+if (!envFound) {
+  // This error should crash whole process
+  throw new Error("⚠️  Couldn't find .env file  ⚠️");
+}
+
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 
@@ -16,11 +23,11 @@ import { variant } from './db/variant';
   imports: [
     SequelizeModule.forRoot({
       dialect: 'mysql',
-      host: 'localhost',
+      host: process.env.DB_HOST,
       port: 3306,
-      username: 'root',
-      password: '1234',
-      database: 'neracaid_cloudacc',
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       models: [variant],
       autoLoadModels: true,
       synchronize: false
