@@ -1,7 +1,9 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { VariantService } from './variant.service';
+import { ApiGatewayGuard } from '../../common/guards/api-gateway.guard';
 
-@Controller('variant')
+@Controller('variants')
+@UseGuards(ApiGatewayGuard)
 export class VariantController {
   constructor(private readonly variantService: VariantService) {}
 

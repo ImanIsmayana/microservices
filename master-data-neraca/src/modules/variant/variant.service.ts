@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Sequelize } from 'sequelize-typescript';
-import { getDynamicVariantModel } from '../db/variant';
+import { getDynamicVariantModel } from '../../db/variant';
 
 @Injectable()
 export class VariantService {

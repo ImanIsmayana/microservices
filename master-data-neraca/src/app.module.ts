@@ -6,15 +6,17 @@ if (!envFound) {
 }
 
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
+import { ApiGatewayGuard } from './common/guards/api-gateway.guard';
 import { SequelizeModule } from '@nestjs/sequelize';
 
 // load controller
 import { AppController } from './app.controller';
-import { VariantController } from './variant/variant.controller';
+import { VariantController } from './modules/variant/variant.controller';
 
 // load service
 import { AppService } from './app.service';
-import { VariantService } from './variant/variant.service';
+import { VariantService } from './modules/variant/variant.service';
 
 // db
 import { variant } from './db/variant';
@@ -34,7 +36,14 @@ import { variant } from './db/variant';
     }),
   ],
   controllers: [AppController, VariantController],
-  providers: [AppService, VariantService],
+  providers: [
+    AppService, 
+    VariantService,
+    {
+      provide: APP_GUARD,
+      useClass: ApiGatewayGuard, // Register the global guard
+    },
+  ],
   exports: [SequelizeModule],
 })
 export class AppModule {}
