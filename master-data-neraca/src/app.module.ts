@@ -12,14 +12,14 @@ import { SequelizeModule } from '@nestjs/sequelize';
 
 // load controller
 import { AppController } from './app.controller';
-import { VariantController } from './modules/variant/variant.controller';
+import { VariantController } from './modules/controllers/variant.controller';
 
 // load service
 import { AppService } from './app.service';
-import { VariantService } from './modules/variant/variant.service';
+import { VariantService } from './modules/models/variant.service';
 
 // db
-import { variant } from './db/variant';
+import { Variant } from './db/variant';
 
 @Module({
   imports: [
@@ -30,7 +30,7 @@ import { variant } from './db/variant';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      models: [variant],
+      models: [Variant],
       autoLoadModels: true,
       synchronize: false
     }),

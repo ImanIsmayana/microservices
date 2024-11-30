@@ -1,5 +1,5 @@
 import { Controller, Get, Param, UseGuards } from '@nestjs/common';
-import { VariantService } from './variant.service';
+import { VariantService } from '../models/variant.service';
 import { ApiGatewayGuard } from '../../common/guards/api-gateway.guard';
 
 @Controller('variants')

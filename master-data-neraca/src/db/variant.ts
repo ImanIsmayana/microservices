@@ -1,7 +1,7 @@
 import { Column, Model, DataType, Table, Sequelize } from 'sequelize-typescript';
 
 @Table
-export class variant extends Model {
+export class Variant extends Model {
   @Column({
     type: DataType.INTEGER,
     primaryKey: true,
@@ -20,7 +20,7 @@ export class variant extends Model {
 }
 
 export const getDynamicVariantModel = (sequelize: Sequelize, tableName: string) => {
-  return variant.init(
+  return Variant.init(
     {
       id: {
         type: DataType.INTEGER,
