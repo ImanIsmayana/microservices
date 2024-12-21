@@ -7,6 +7,7 @@ if (!envFound) {
 
 import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
+import { JwtModule } from '@nestjs/jwt';
 import { ApiGatewayGuard } from './common/guards/api-gateway.guard';
 import { SequelizeModule } from '@nestjs/sequelize';
 
@@ -34,6 +35,10 @@ import { Variant } from './db/variant';
       autoLoadModels: true,
       synchronize: false
     }),
+    JwtModule.register({
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '1h' },
+    }),
   ],
   controllers: [AppController, VariantController],
   providers: [
@@ -44,6 +49,6 @@ import { Variant } from './db/variant';
       useClass: ApiGatewayGuard, // Register the global guard
     },
   ],
-  exports: [SequelizeModule],
+  exports: [SequelizeModule,JwtModule],
 })
 export class AppModule {}
